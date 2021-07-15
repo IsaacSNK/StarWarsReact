@@ -1,5 +1,6 @@
 import React from 'react'
-import StarWarsCharacter from './StarWarsCharacter';
+import { StarWarsCharacter } from './StarWarsCharacter';
+import { fetchStarWarsData } from "../services/StarWarsDataService";
 
 export default class StarWarsPeople extends React.Component {
     constructor(props) {
@@ -7,11 +8,13 @@ export default class StarWarsPeople extends React.Component {
         this.state = {
             characters: []
         }
-        this.loadData = this.loadData.bind(this); //This is to make the load data aware of the context of the class
     }
 
-    componentDidMount() {
-        this.loadData();
+    async componentDidMount() {
+        const data = await fetchStarWarsData();
+        this.setState({
+            characters: data
+        })
     }
 
     render() {
@@ -25,6 +28,7 @@ export default class StarWarsPeople extends React.Component {
                         <th>Name</th>
                         <th>Mass</th>
                         <th>Height</th>
+                        <th>Eye Color</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,13 +36,5 @@ export default class StarWarsPeople extends React.Component {
                 </tbody>
             </table>
         );
-    }
-
-    async loadData() {
-        const response = await fetch("https://swapi.dev/api/people/");
-        const parsedResponse = await response.json();
-        this.setState({
-            characters: parsedResponse.results || [] // Or used to define a default value in case no data is returned
-        })
     }
 }
