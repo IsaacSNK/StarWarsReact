@@ -14,7 +14,7 @@ export default class StarWarsPeople extends React.Component {
         const data = await fetchStarWarsData();
         this.setState({
             characters: data
-        })
+        });
     }
 
     render() {
@@ -32,7 +32,7 @@ export default class StarWarsPeople extends React.Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.characters.map((c, index) => <StarWarsCharacter key={index} character={c}></StarWarsCharacter>)}
+                    {this.state.characters.map((c, index) => <StarWarsCharacter key={index} character={c} test="1"></StarWarsCharacter>)}
                 </tbody>
             </table>
         );
