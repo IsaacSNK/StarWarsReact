@@ -2,7 +2,6 @@ import "./StarWarsCharacters.styles.css"
 
 import React from 'react'
 import { StarWarsCharacterDetails } from "../StarWarsCharacterDetails/StarWarsCharacterDetails";
-import { reportTelemetry } from "../../services/TelemetryService";
 
 export class StarWarsCharacter extends React.Component {
     constructor() {
@@ -34,9 +33,6 @@ export class StarWarsCharacter extends React.Component {
 
     linkClickHandler(event) {
         event.preventDefault();
-        reportTelemetry({
-            id: "characterLink"            
-        });
         this.setState({
             modalIsOpen: true
         });
